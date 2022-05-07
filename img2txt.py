@@ -33,15 +33,14 @@ def main(opt):
         num_cols = int(width / cell_width)
         num_rows = int(height / cell_height)
 
-    output_file = open(opt.output, 'w')
-    for i in range(num_rows):
-        for j in range(num_cols):
-            output_file.write(
-                CHAR_LIST[keys[np.searchsorted(keys, max(keys) * (1-np.mean(image[int(i * cell_height):int(
-                    (i + 1) * cell_height), int(j * cell_width):int((j + 1) * cell_width)])/255))]]
-            )
-        output_file.write("\n")
-    output_file.close()
+    with open(opt.output, "w") as output_file:
+        for i in range(num_rows):
+            for j in range(num_cols):
+                output_file.write(
+                    CHAR_LIST[keys[np.searchsorted(keys, max(keys) * (1-np.mean(image[int(i * cell_height):int(
+                        (i + 1) * cell_height), int(j * cell_width):int((j + 1) * cell_width)])/255))]]
+                )
+            output_file.write("\n")
 
 
 if __name__ == '__main__':
