@@ -54,6 +54,9 @@ W53HW2];[[!^*~~!T;~~~~~!~_``~,`~!T;!!*;;\\\\|]ZZZ5V2V{43{45{V2V{{}4{{44ZZ1>|||;^
 &{$g}|Z6@$}\W5|*,~^#g&[```~~_`~^\\TT;;T>]]Z}5442#999999999#99H#9H######H2VV{5}1]|;**;*!~```_~~~~ZW8W}Z]1{VH9Z{5V66W98%&90g6#8g@@
 %908H8@@#>Z#W{5|T}0@@%3,~~_~~_~!T\TT\>}55{2#H2HW66W666WW669WW99W#WWWW66W69###2{44Z>\;*!~```~~~~~H%@@669HWW%@&$&9H#H968880@%60ggg
 ```
+## Setup
+### pip
+`pip install -r requirements.txt`
 ## Usage
 ```
 usage: Image to ASCII [-h] [-i INPUT] [-o OUTPUT] [-n NUM_COLS]
