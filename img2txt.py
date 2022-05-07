@@ -9,20 +9,15 @@ import numpy as np
 
 def get_args():
     parser = argparse.ArgumentParser("Image to ASCII")
-    parser.add_argument("--input", type=str, default="data/input.jpg", help="Path to input image")
-    parser.add_argument("--output", type=str, default="data/output.txt", help="Path to output text file")
-    parser.add_argument("--mode", type=str, default="complex", choices=["simple", "complex"],
-                        help="10 or 70 different characters")
-    parser.add_argument("--num_cols", type=int, default=150, help="number of character for output's width")
+    parser.add_argument("-i","--input", type=str, help="input image")
+    parser.add_argument("-o","--output", type=str, default="output.txt", help="output text file")
+    parser.add_argument("-n","--num_cols", type=int, default=128, help="number of character for output's width")
     args = parser.parse_args()
     return args
 
 
 def main(opt):
-    if opt.mode == "simple":
-        CHAR_LIST = {47: '@', 43: '%', 35: '#', 18: '*', 14: '+', 12: ':', 5: '-', 6: '.', 0: ' '}
-    else:
-        CHAR_LIST = {30: '{', 36: '9', 22: '|', 34: 'H', 28: '5', 23: '>', 45: 'g', 33: '2', 31: '3', 20: 'T', 32: 'V', 29: '4', 18: '*', 24: ']', 27: '}', 21: '\\', 42: '8', 40: '&', 25: '1', 19: ';', 37: 'W', 35: '#', 26: 'Z', 44: '0', 39: '6', 0: ' ', 16: '!', 14: '[', 41: '$', 43: '%', 6: '_', 13: ',', 5: '`', 12: '~', 47: '@', 17: '^'}
+    CHAR_LIST = {30: '{', 36: '9', 22: '|', 34: 'H', 28: '5', 23: '>', 45: 'g', 33: '2', 31: '3', 20: 'T', 32: 'V', 29: '4', 18: '*', 24: ']', 27: '}', 21: '\\', 42: '8', 40: '&', 25: '1', 19: ';', 37: 'W', 35: '#', 26: 'Z', 44: '0', 39: '6', 0: ' ', 16: '!', 14: '[', 41: '$', 43: '%', 6: '_', 13: ',', 5: '`', 12: '~', 47: '@', 17: '^'}
     keys = np.sort(list(CHAR_LIST.keys()))
     num_cols = opt.num_cols
     image = cv2.imread(opt.input)
