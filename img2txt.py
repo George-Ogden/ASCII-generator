@@ -7,11 +7,11 @@ import cv2
 import numpy as np
 
 
-def get_args():
+def parse_args():
     parser = argparse.ArgumentParser("Image to ASCII")
     parser.add_argument("-i","--input", type=str, help="input image")
     parser.add_argument("-o","--output", type=str, default="output.txt", help="output text file")
-    parser.add_argument("-n","--num_cols", type=int, default=128, help="number of character for output's width")
+    parser.add_argument("-n","--num_cols", type=int, default=128, help="number of character for output's width or 0 for maximum resolution")
     args = parser.parse_args()
     return args
 
@@ -19,17 +19,16 @@ def get_args():
 def main(opt):
     CHAR_LIST = {30: '{', 36: '9', 22: '|', 34: 'H', 28: '5', 23: '>', 45: 'g', 33: '2', 31: '3', 20: 'T', 32: 'V', 29: '4', 18: '*', 24: ']', 27: '}', 21: '\\', 42: '8', 40: '&', 25: '1', 19: ';', 37: 'W', 35: '#', 26: 'Z', 44: '0', 39: '6', 0: ' ', 16: '!', 14: '[', 41: '$', 43: '%', 6: '_', 13: ',', 5: '`', 12: '~', 47: '@', 17: '^'}
     keys = np.sort(list(CHAR_LIST.keys()))
-    num_cols = opt.num_cols
+    num_cols = opt.num_cols or np.inf
     image = cv2.imread(opt.input)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     height, width = image.shape
-    cell_width = width / opt.num_cols
-    cell_height = 2 * cell_width
+    cell_width = width / num_cols
+    cell_height = 2 * cell_width or np.inf
     num_rows = int(height / cell_height)
     if num_cols > width or num_rows > height:
-        print("Too many columns or rows. Use default setting")
-        cell_width = 6
-        cell_height = 12
+        cell_width = 1
+        cell_height = 2
         num_cols = int(width / cell_width)
         num_rows = int(height / cell_height)
 
@@ -44,5 +43,5 @@ def main(opt):
 
 
 if __name__ == '__main__':
-    opt = get_args()
+    opt = parse_args()
     main(opt)
