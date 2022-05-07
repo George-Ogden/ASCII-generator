@@ -20,10 +20,10 @@ def get_args():
 
 def main(opt):
     if opt.mode == "simple":
-        CHAR_LIST = '@%#*+=-:. '
+        CHAR_LIST = {47: '@', 43: '%', 35: '#', 18: '*', 14: '+', 12: ':', 5: '-', 6: '.', 0: ' '}
     else:
-        CHAR_LIST = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
-    num_chars = len(CHAR_LIST)
+        CHAR_LIST = {30: '{', 36: '9', 22: '|', 34: 'H', 28: '5', 23: '>', 45: 'g', 33: '2', 31: '3', 20: 'T', 32: 'V', 29: '4', 18: '*', 24: ']', 27: '}', 21: '\\', 42: '8', 40: '&', 25: '1', 19: ';', 37: 'W', 35: '#', 26: 'Z', 44: '0', 39: '6', 0: ' ', 16: '!', 14: '[', 41: '$', 43: '%', 6: '_', 13: ',', 5: '`', 12: '~', 47: '@', 17: '^'}
+    keys = np.sort(list(CHAR_LIST.keys()))
     num_cols = opt.num_cols
     image = cv2.imread(opt.input)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -42,9 +42,9 @@ def main(opt):
     for i in range(num_rows):
         for j in range(num_cols):
             output_file.write(
-                CHAR_LIST[min(int(np.mean(image[int(i * cell_height):min(int((i + 1) * cell_height), height),
-                                          int(j * cell_width):min(int((j + 1) * cell_width),
-                                                                  width)]) * num_chars / 255), num_chars - 1)])
+                CHAR_LIST[keys[np.searchsorted(keys, max(keys) * (1-np.mean(image[int(i * cell_height):int(
+                    (i + 1) * cell_height), int(j * cell_width):int((j + 1) * cell_width)])/255))]]
+            )
         output_file.write("\n")
     output_file.close()
 
