@@ -1,10 +1,6 @@
-"""
-@author: Viet Nguyen <nhviet1009@gmail.com>
-"""
-import argparse
-
-import cv2
 import numpy as np
+import argparse
+import cv2
 
 
 def parse_args():
