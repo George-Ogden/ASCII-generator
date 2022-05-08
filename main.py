@@ -1,15 +1,16 @@
 import numpy as np
-import argparse
 import cv2
 
+import argparse
+import sys
 
 def parse_args():
     parser = argparse.ArgumentParser("Image to ASCII")
     parser.add_argument("-i", "--input", type=str, help="input image")
     parser.add_argument("-o", "--output", type=str,
-                        default="output.txt", help="output text file")
+                        default=None, help="output text file (default: sys.stdout)")
     parser.add_argument("-n", "--num_cols", type=int, default=128,
-                        help="number of character for output's width or 0 for maximum resolution")
+                        help="number of character for output's width (default: maximum resolution)")
     args = parser.parse_args()
     return args
 
@@ -31,7 +32,7 @@ def main(opt):
         num_cols = int(width / cell_width)
         num_rows = int(height / cell_height)
 
-    with open(opt.output, "w") as output_file:
+    with (open(opt.output, "w") if opt.output else sys.stdout) as output_file:
         for i in range(num_rows):
             for j in range(num_cols):
                 output_file.write(

@@ -66,7 +66,7 @@ options:
   -i INPUT, --input INPUT
                         input image
   -o OUTPUT, --output OUTPUT
-                        output text file
+                        output text file (default: sys.stdout)
   -n NUM_COLS, --num_cols NUM_COLS
-                        number of character for output's width or 0 for maximum resolution
+                        number of character for output's width (default: maximum resolution)
  ```
