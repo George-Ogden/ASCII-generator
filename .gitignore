@@ -2,3 +2,5 @@
 *.png
 *.jpg
 *.jpeg
+*.ttf
+generator.py
