@@ -59,7 +59,7 @@ W53HW2];[[!^*~~!T;~~~~~!~_``~,`~!T;!!*;;\\\\|]ZZZ5V2V{43{45{V2V{{}4{{44ZZ1>|||;^
 `pip install -r requirements.txt`
 ## Usage
 ```
-usage: Image to ASCII [-h] [-i INPUT] [-o OUTPUT] [-n NUM_COLS]
+usage: Image to ASCII [-h] [-i INPUT] [-o OUTPUT] [-n NUM_COLS] [-c CHARACTERS]
 
 options:
   -h, --help            show this help message and exit
@@ -69,4 +69,6 @@ options:
                         output text file (default: sys.stdout)
   -n NUM_COLS, --num_cols NUM_COLS
                         number of character for output's width (default: maximum resolution)
+  -c CHARACTERS, --characters CHARACTERS
+                        characters to include (default: ASCII)
  ```
