@@ -7,10 +7,10 @@ import sys
 
 def parse_args():
     parser = argparse.ArgumentParser("Image to ASCII")
-    parser.add_argument("-i", "--input", type=str, help="input image")
+    parser.add_argument("-i", "--image", type=str, help="input image")
     parser.add_argument("-o", "--output", type=str,
                         default=None, help="output text file (default: sys.stdout)")
-    parser.add_argument("-n", "--num_cols", type=int, default=128,
+    parser.add_argument("-n", "--num_cols", type=int, default=0,
                         help="number of character for output's width (default: maximum resolution)")
     parser.add_argument("-c","--characters", type=str ,help="characters to include (default: ASCII)", default="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
     args = parser.parse_args()
@@ -18,7 +18,7 @@ def parse_args():
 
 
 def main(opt):
-    image = cv2.imread(opt.input)
+    image = cv2.imread(opt.image)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     with open("characters.pickle","rb") as characters_file:
