@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 
+from collections import defaultdict
 import argparse
 import pickle
 import sys
@@ -14,8 +15,8 @@ def parse_args():
                         default=None, help="output text file (default: sys.stdout)")
     parser.add_argument("-n", "--num_cols", type=int, default=0,
                         help="number of character for output's width (default: maximum resolution)")
-    parser.add_argument("-c", "--characters", type=str, help="characters to include (default: ASCII)",
-                        default="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
+    parser.add_argument("-c","--characters", type=str ,help="characters to include (default: ASCII)", 
+                        default="!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
     args = parser.parse_args()
     return args
 
@@ -50,8 +51,10 @@ def main(opt):
     with open("characters.pickle", "rb") as characters_file:
         characters_map = pickle.load(characters_file)
 
-    characters = {characters_map.get(
-        char, 0): char for char in opt.characters + " "}
+    characters = defaultdict(list)
+    for char in opt.characters + " ":
+        characters[characters_map.get(char,-1)].append(char)
+
     keys = np.sort(list(characters.keys()))
 
     num_cols = opt.num_cols or np.inf
@@ -70,8 +73,10 @@ def main(opt):
         for i in range(num_rows):
             for j in range(num_cols):
                 output_file.write(
-                    characters[keys[np.searchsorted(keys, max(keys) * (1-np.mean(image[int(i * cell_height):int(
-                        (i + 1) * cell_height), int(j * cell_width):int((j + 1) * cell_width)])/255))]]
+                    np.random.choice(
+                        characters[keys[np.searchsorted(keys, max(keys) * (1-np.mean(image[int(i * cell_height):int(
+                            (i + 1) * cell_height), int(j * cell_width):int((j + 1) * cell_width)])/255))]]
+                    )
                 )
             output_file.write("\n")
 
