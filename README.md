@@ -72,3 +72,15 @@ options:
   -c CHARACTERS, --characters CHARACTERS
                         characters to include (default: ASCII)
  ```
+## Character Sets
+Here are some interesting character sets you might like to use after the `-c`. _Note that you need to escape characters depending on your shell!_ Please, feel free to contribute and add your own!
+### Ascii
+```!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~```
+### Alphanumeric
+```0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz```
+### Maths
+```0123456789αβΓγΔδζηθλμξοΠπρΣστΦφψΩω±×÷϶∂∆∏∑∙√∞∩∫≈≠≡≤≥/*+=<>```
+### Numbers
+```0123456789⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳⓪⓿❶❷❸❹❺❻❼❽❾❿⓫⓬⓭⓭⓮⓯⓰⓱⓲⓳⓴```
+### Greek Letters
+```ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφΧχΨψΩω```
